@@ -2,14 +2,16 @@ const nodemailer = require("nodemailer");
 const env = require("./env");
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: "173.194.202.108", // IP directa de smtp.gmail.com
     port: 465,       // 1. Cambiamos al puerto seguro 465 (Soportado por Render)
     secure: true,    // 2. Debe ser true obligatoriamente para el puerto 465
     auth: {
         user: env.EMAIL_USER,
         pass: env.EMAIL_PASS,
     },
-    family: 4        // 3. Obliga a Render a conectar por IPv4, evitando el ENETUNREACH
+    family: 4,
+    connectionTimeout: 20000, // Damos más tiempo de tolerancia (20s)
+    greetingTimeout: 20000
 });
 
 const sendEmail = async ({ to, subject, html }) => {
