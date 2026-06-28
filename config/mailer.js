@@ -9,6 +9,17 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+console.log("EMAIL_USER:", env.EMAIL_USER);
+console.log("ADMIN_EMAIL:", env.ADMIN_EMAIL);
+
+transporter.verify((error, success) => {
+    if (error) {
+        console.error("SMTP ERROR:", error);
+    } else {
+        console.log("SMTP READY");
+    }
+});
+
 const sendEmail = async ({ to, subject, html }) => {
     await transporter.sendMail({
         from: `"Order Food" <${env.EMAIL_USER}>`,
