@@ -355,7 +355,7 @@ const completeRegistration = async (payload) => {
     });
 
     try {
-        await mailer.nuevoUsuarioRegistrado({
+        mailer.nuevoUsuarioRegistrado({
             name: newUser.full_name,
             role: newUser.role,
             phone: newUser.phone,

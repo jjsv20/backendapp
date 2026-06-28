@@ -8,7 +8,7 @@ const createApplication = async (userId, payload) => {
     const application = await repository.createApplication({ ...payload, user_id: userId, });
 
     try {
-        await mailer.newRestaurantApplication({
+        mailer.newRestaurantApplication({
             restaurantName: application.restaurant_name,
             ownerName: application.owner_name,
             restaurantEmail: application.business_email,
