@@ -9,17 +9,6 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-console.log("EMAIL_USER:", env.EMAIL_USER);
-console.log("ADMIN_EMAIL:", env.ADMIN_EMAIL);
-
-transporter.verify((error, success) => {
-    if (error) {
-        console.error("SMTP ERROR:", error);
-    } else {
-        console.log("SMTP READY");
-    }
-});
-
 const sendEmail = async ({ to, subject, html }) => {
     await transporter.sendMail({
         from: `"Order Food" <${env.EMAIL_USER}>`,
@@ -31,8 +20,8 @@ const sendEmail = async ({ to, subject, html }) => {
 
 const nuevoUsuarioRegistrado = async ({ name, role, phone, email }) => {
     await transporter.sendMail({
-        from: `"OrderFood" <${process.env.EMAIL_USER}>`,
-        to: process.env.ADMIN_EMAIL,
+        from: `"OrderFood" <${env.EMAIL_USER}>`,
+        to: env.ADMIN_EMAIL,
         subject: `Nuevo usuario registrado`,
         html: `
             <h2>Nuevo registro</h2>
